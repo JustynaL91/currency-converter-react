@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { currencies } from "../currencies";
 import { Result } from "./Result";
-import "./style.css";
+import { Button, Field, Header, Info, LabelText } from "./styled";
 
 
 export const Form = ({ calculateResult, result }) => {
@@ -14,16 +14,15 @@ export const Form = ({ calculateResult, result }) => {
     }
 
     return (
-        <form className="form" onSubmit={onSubmit}>
-            <h1 className="form__header">Przelicznik walut</h1>
+        <form onSubmit={onSubmit}>
+            <Header>Przelicznik walut</Header>
             <p>
                 <label>
-                    <span className="form__labelText">Kwota w PLN*: </span>
-                    <input
+                    <LabelText>Kwota w PLN*: </LabelText>
+                    <Field
                         value={amount}
                         onChange={({ target }) => setAmount(target.value)}
                         placeholder="Wpisz kwotę w zł"
-                        className="form__field js-amount"
                         type="number"
                         required step="0.01"
                     />
@@ -31,9 +30,9 @@ export const Form = ({ calculateResult, result }) => {
             </p>
             <p>
                 <label>
-                    <span className="form__labelText">Waluta: </span>
-                    <select
-                        className="form__field"
+                    <LabelText>Waluta: </LabelText>
+                    <Field
+                        as="select"
                         value={currency}
                         onChange={({ target }) => setCurrency(target.value)}
                     >
@@ -46,13 +45,13 @@ export const Form = ({ calculateResult, result }) => {
                             </option>
                         )))}
 
-                    </select>
+                    </Field>
                 </label>
             </p>
             <p>
-                <button className="form__button">Przelicz!</button>
+                <Button>Przelicz!</Button>
             </p>
-            <p className="form__info">Kursy pochodzą ze strony nbp.pl z Tabeli nr 115/A/NBP/2021 z dnia 2021-06-16</p>
+            <Info>Kursy pochodzą ze strony nbp.pl z Tabeli nr 115/A/NBP/2021 z dnia 2021-06-16</Info>
 
             <Result result={result} />
         </form>
